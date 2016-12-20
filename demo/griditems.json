@@ -1,0 +1,149 @@
+﻿{
+    "Status": "Success",
+    "Message": null,
+    "Data": {
+        "Ads": [
+            {
+                "Name": "Test Ad",
+                "Owners": [
+                    "100",
+                    "101",
+                    "123"
+                ],
+                "Pages": [
+                    "Home",
+                    "Result"
+                ],
+                "Durations": [
+                    {
+                        "DateRange": {
+                            "FromDate": "2016-11-26T00:00:00",
+                            "ToDate": "2016-12-26T00:00:00"
+                        },
+                        "AllowedDays": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    }
+                ],
+                "LastModified": "2016-11-30T00:41:41.977",
+                "IsActive": true,
+                "Stats": {
+                    "Click": 0
+                }
+            },
+            {
+                "Name": "Test Ad",
+                "Owners": [
+                    "100",
+                    "101",
+                    "123"
+                ],
+                "Pages": [
+                    "Home",
+                    "Result"
+                ],
+                "Durations": [
+                    {
+                        "DateRange": {
+                            "FromDate": "2016-11-26T00:00:00",
+                            "ToDate": "2016-12-26T00:00:00"
+                        },
+                        "AllowedDays": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    }
+                ],
+                "LastModified": "2016-12-01T14:42:36.96",
+                "IsActive": true,
+                "Stats": {
+                    "Click": 0
+                }
+            },
+            {
+                "Name": "Test Ad",
+                "Owners": [
+                    "100",
+                    "101",
+                    "123"
+                ],
+                "Pages": [
+                    "Home",
+                    "Result"
+                ],
+                "Durations": [
+                    {
+                        "DateRange": {
+                            "FromDate": "2016-11-26T00:00:00",
+                            "ToDate": "2016-12-26T00:00:00"
+                        },
+                        "AllowedDays": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    }
+                ],
+                "LastModified": "2016-12-01T14:46:39.01",
+                "IsActive": true,
+                "Stats": {
+                    "Click": 0
+                }
+            },
+            {
+                "Name": "Test Ad",
+                "Owners": [
+                    "100",
+                    "101",
+                    "123"
+                ],
+                "Pages": [
+                    "Home",
+                    "Result"
+                ],
+                "Durations": [
+                    {
+                        "DateRange": {
+                            "FromDate": "2016-11-26T00:00:00",
+                            "ToDate": "2016-12-26T00:00:00"
+                        },
+                        "AllowedDays": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    }
+                ],
+                "LastModified": "2016-12-01T14:53:24.313",
+                "IsActive": true,
+                "Stats": {
+                    "Click": 0
+                }
+            }
+        ],
+        "PagingInfo": {
+            "TotalRecords": 4,
+            "CurrentPage": 1,
+            "PageSize": 10
+        }
+    }
+}
