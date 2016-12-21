@@ -9,7 +9,7 @@
         <div on-click="addItem" style="cursor: pointer;" hidden$="[[!enableAdd]]">Add Item</div>
         <div on-click="removeItem" style="cursor: pointer;" hidden$="[[!enableDelete]]">Remove Item</div>
         <t-filter id="filter" hide="[[!_showFilter]]" ></t-filter>
-        <vaadin-grid id="vaadingrid" selection-mode="[[_gridSelectionMode]]">
+        <vaadin-grid id="vaadingrid" selection-mode="single" >
             <content select=".vaadin-grid-content"></content>
         </vaadin-grid>
     </template>
@@ -44,10 +44,6 @@ Polymer({
         },
 
 
-        _gridSelectionMode: {
-            type: String,
-            value: 'single'
-        },
 
         _showFilter: {
             type: Boolean,
@@ -57,29 +53,19 @@ Polymer({
 
     },
 
-    // observers: [
-    //     '_onPagingInfoChanged(pagingInfo.*)'
-    //   ],
 
     ready: function() {
-        //console.log(this.isConnected);
+        
     },
 
     attached: function() {
-        // var footer = this.$.vaadingrid.footer;
-        // footer.addRow(0);
-        // footer.getCell(0, 0).colspan = this.$.vaadingrid.columns.length;
-        // footer.getCell(0, 0).content = document.createElement('t-pagination').outerHTML;    
 
-        //this._onPagingInfoChanged();    
     },
 
     _onEnableDeleteChange: function() {
         if (this.enableDelete) {
-            this._gridSelectionMode = 'multi'
-        } else {
-            this._gridSelectionMode = 'single'
-        }
+            this.$.vaadingrid.selection.mode = 'multi';
+        } 
     },
 
     setFilterData: function(filters){
@@ -116,6 +102,7 @@ Polymer({
             footer.getCell(0, 0).content = pagination.outerHTML;
 
             this.$.vaadingrid.visibleRows = pagination.pageSize;
+            this.$.vaadingrid.size = pagination.totalRecords;
         }
     },
 
@@ -129,7 +116,7 @@ Polymer({
 
     removeItem: function() {
         this.fire('tlg-report-removeitem', {
-            items: []
+            selectedIndex: this.$.vaadingrid.selection.selected()
         });
     }
 

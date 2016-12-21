@@ -11,8 +11,8 @@
     <tlg-report title='Ad list' enable-filter enable-add enable-delete style="height:200px">
         <table class="vaadin-grid-content">
             <colgroup>
-                <col name="fname">
-                <col name="lname">
+                <col name="fname" sortable="" sort-direction="asc">
+                <col name="lname" sortable="">
             </colgroup>
             <thead>
                 <tr>
@@ -48,7 +48,7 @@
             alert('Add Item')
         });
         reportComp.addEventListener('tlg-report-removeitem', function(e) {
-            alert('Remove Item' + JSON.stringify(e.detail.items))
+            alert('Remove Item' + JSON.stringify(e.detail.selectedIndex))
         });
 
         //
@@ -131,17 +131,25 @@
             lname: 'jerry'
         }];
 
-        reportComp.setGridItems(_gridData.slice(0, 2));
-
         reportComp.setPagingInfo({
             totalRecords: _gridData.length,
-            pageSize: 10
+            pageSize: 2
         });
+        
+        reportComp.setGridItems(_gridData.slice(0, 2));
+
 
         reportComp.addEventListener('t-paginated', function(e) {
             console.log(e.detail);
             var start = (e.detail.pageNumber - 1) * e.detail.pageSize;
             reportComp.setGridItems(_gridData.slice(start, start + e.detail.pageSize));
+        });
+
+        reportComp.addEventListener('sort-order-changed', function(e) {
+            e.preventDefault();
+
+            console.log(e.detail);
+            
         });
 
     });

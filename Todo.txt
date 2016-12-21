@@ -1,5 +1,6 @@
 Known Issues:
 
-Grid scroll not working properly
-Grid footer is getting reset randomly
-Grid multiselect is not working 
+Grid scroll not working properly - HIGH
+Grid footer is getting reset randomly - HIGH
+Grid multiselect is not working -- DONE
+Grid name search is not setup - HIGH
