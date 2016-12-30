@@ -3,8 +3,63 @@
 <link rel="import" href="../t-pagination/t-pagination.html" />
 <link rel="import" href="../vaadin-grid/vaadin-grid.html" />
 <dom-module id="tlg-report">
-    <template>
-        [[title]]
+    <template> 
+    <style>
+        :host{
+
+
+            --vaadin-grid-row-height : var(--report-content-row-height, 50px);
+            --vaadin-grid-header-row-height: var(--report-header-height, 60px);
+            --vaadin-grid-footer-row-height: var(--report-header-height, 100px);
+            --vaadin-grid-row-cell:{
+                font-size: var(--report-content-size, 14px);
+                @apply(--report-cell-mixin);
+            }
+            --vaadin-grid-selected-row-cell: {
+                background-color: var(--report-selcted-bg, rgba(179, 188, 199, 0.2));
+                color: var(--report-selcted-color, rgba(0, 0, 0, 0.87));
+                @apply(--report-selected-cell-mixin);
+
+            }
+            --vaadin-grid-row-stripe-cell: {
+                background:var(--report-odd-row-bg,rgba(240, 244, 249, 0.2));
+            }
+
+            display: block;
+            font-family: var(--primary-font-family,'Open sans'); 
+        }
+        #vaadingrid{
+            color: var(--report-font-color, rgba(0, 0, 0, 0.54));
+        }
+        #vaadingrid::content .vaadin-grid-header th {
+            color: var(--report-header-color, rgba(0,0,0,0.87));
+        }
+        #vaadingrid::content .vaadin-grid-row-focused:after{
+            display: none;
+        }
+        #vaadingrid::content thead{
+            box-shadow: none;
+            border-bottom: 1px solid var(--input-border-color,#ccc);
+        }
+        #vaadingrid::content tfoot td{
+            padding: 0;
+        }
+        #vaadingrid::content .vaadin-grid-column-footer-content{
+            width: 100%;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flex;
+            display: -o-flex;
+            display: flex;
+            -ms-flex-pack: end;
+              -webkit-justify-content: flex-end;
+              justify-content: flex-end;
+        }
+        </style>
+        <div>
+            [[title]]
+        </div>
+
         <div on-click="toggleFilter" style="cursor: pointer;" hidden id="filterHandle">Toggle Filter</div>
         <div on-click="addItem" style="cursor: pointer;" hidden$="[[!enableAdd]]">Add Item</div>
         <div on-click="removeItem" style="cursor: pointer;" hidden$="[[!enableDelete]]">Remove Item</div>

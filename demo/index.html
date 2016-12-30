@@ -8,16 +8,22 @@
 </head>
 
 <body>
-    <tlg-report title='Ad list' enable-filter enable-add enable-delete style="height:200px">
+    <tlg-report title='Ad list' enable-filter>
         <table class="vaadin-grid-content">
             <colgroup>
-                <col name="fname" sortable="" sort-direction="asc">
+                <col name="fname" sortable="" >
                 <col name="lname" sortable="">
+                <col name="sname1" sortable="">
+                <col name="sname2" sortable="">
+                <col name="sname3" sortable="">
             </colgroup>
             <thead>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Some Name</th>
+                    <th>Some Name</th>
+                    <th>Some Name</th>
                 </tr>
             </thead>
             <!--  <tbody>
@@ -85,55 +91,94 @@
 
         var _gridData = [{
             fname: 'Tom1',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         }, {
             fname: 'Tom2',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         }, {
             fname: 'Tom3',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         }, {
             fname: 'Tom4',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         }, {
             fname: 'Tom5',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         }, {
             fname: 'Tom6',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom7',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom8',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom9',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom10',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom11',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom12',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         },
         {
             fname: 'Tom13',
-            lname: 'jerry'
+            lname: 'jerry',
+            sname1:'Hellop',
+            sname2:'Hellp',
+            sname3:'sasaassa'
         }];
 
         reportComp.setPagingInfo({
             totalRecords: _gridData.length,
-            pageSize: 2
+            pageSize:2
         });
         
         reportComp.setGridItems(_gridData.slice(0, 2));
