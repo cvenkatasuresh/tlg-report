@@ -5,6 +5,14 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../tlg-report.html" />
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -86,8 +94,33 @@
                     "label": "Maximum Price",
                     "value": "2138.32"
                 }]
-            }
-        ]);
+            }, {
+                "category": "Price",
+                "type": "Range",
+                "label": "Price",
+                "items": [{
+                    "name": "Min",
+                    "label": "Minimum Price",
+                    "value": "35.65"
+                }, {
+                    "name": "Max",
+                    "label": "Maximum Price",
+                    "value": "2138.32"
+                }]
+            }, {
+                "category": "Price",
+                "type": "Range",
+                "label": "Price",
+                "items": [{
+                    "name": "Min",
+                    "label": "Minimum Price",
+                    "value": "35.65"
+                }, {
+                    "name": "Max",
+                    "label": "Maximum Price",
+                    "value": "2138.32"
+                }]
+            }]);
 
         var _gridData = [{
             fname: 'Tom1',
@@ -178,7 +211,7 @@
 
         reportComp.setPagingInfo({
             totalRecords: _gridData.length,
-            pageSize:2
+            pageSize:10
         });
         
         reportComp.setGridItems(_gridData.slice(0, 2));

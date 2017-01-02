@@ -2,11 +2,18 @@
 <link rel="import" href="../t-filter/t-filter.html" />
 <link rel="import" href="../t-pagination/t-pagination.html" />
 <link rel="import" href="../vaadin-grid/vaadin-grid.html" />
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html" />
+
 <dom-module id="tlg-report">
     <template> 
-    <style>
+    <style include="iron-flex">
         :host{
 
+
+            display: block;
+            font-family: var(--primary-font-family,'Open sans'); 
+            padding: var(--report-primary-spacing,30px);
+            padding-bottom: 0;
 
             --vaadin-grid-row-height : var(--report-content-row-height, 50px);
             --vaadin-grid-header-row-height: var(--report-header-height, 60px);
@@ -14,19 +21,16 @@
             --vaadin-grid-row-cell:{
                 font-size: var(--report-content-size, 14px);
                 @apply(--report-cell-mixin);
-            }
+            };
             --vaadin-grid-selected-row-cell: {
                 background-color: var(--report-selcted-bg, rgba(179, 188, 199, 0.2));
                 color: var(--report-selcted-color, rgba(0, 0, 0, 0.87));
                 @apply(--report-selected-cell-mixin);
 
-            }
+            };
             --vaadin-grid-row-stripe-cell: {
                 background:var(--report-odd-row-bg,rgba(240, 244, 249, 0.2));
-            }
-
-            display: block;
-            font-family: var(--primary-font-family,'Open sans'); 
+            };
         }
         #vaadingrid{
             color: var(--report-font-color, rgba(0, 0, 0, 0.54));
@@ -52,18 +56,66 @@
             display: -o-flex;
             display: flex;
             -ms-flex-pack: end;
-              -webkit-justify-content: flex-end;
-              justify-content: flex-end;
+            -webkit-justify-content: flex-end;
+            justify-content: flex-end;
+        }
+        h3{
+            margin: 0;
+            font-size: var(--report-title-size,20px);
+            color: var(--report-title-color, rgba(0,0,0,0.87));
+            font-weight: normal;
+            
+        }
+        paper-icon-button{
+            color: var(--report-icons-color, rgba(0,0,0,0.18));
+        }
+        paper-icon-button[active]{
+            color: var(--report-icons--active-color, rgba(0,0,0,0.54));
+        }
+        .filter-container {
+            position: relative;
+            background: var(--report-filter-bg,#f6f7f9);
+            margin: 10px 0;
+            padding: 20px;
+        }
+        #filterButton[active]::after {
+            content:"";
+            width: 0px;
+            height: 0px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid var(--report-filter-bg,#f6f7f9);
+            position: absolute;
+            right: 10px;
+            bottom: -10px;
+        }
+        #closeButton{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 30px;
+            height: 30px;
         }
         </style>
-        <div>
-            [[title]]
-        </div>
+        <div class="layout horizontal center">
+            <h3>
+                [[title]]
+            </h3>
+            <span class="flex"></span>
 
-        <div on-click="toggleFilter" style="cursor: pointer;" hidden id="filterHandle">Toggle Filter</div>
-        <div on-click="addItem" style="cursor: pointer;" hidden$="[[!enableAdd]]">Add Item</div>
-        <div on-click="removeItem" style="cursor: pointer;" hidden$="[[!enableDelete]]">Remove Item</div>
-        <t-filter id="filter" hide="[[!_showFilter]]" ></t-filter>
+            <paper-icon-button icon="[[searchIcon]]" on-click="_searchClicked"  id="serachButton"></paper-icon-button>
+            <paper-icon-button icon="[[filterIcon]]" on-click="_toggleFilter" active$="[[_filterOpened]]" id="filterButton"></paper-icon-button>
+            <paper-icon-button icon="[[addIcon]]" on-click="addItem" hidden$="[[!enableAdd]]">Add Item</paper-icon-button>
+            <paper-icon-button icon="[[removeIcon]]" on-click="removeItem" hidden$="[[!enableDelete]]">Remove Item</paper-icon-button>
+
+        </div>
+        <iron-collapse id="filterCollapse" opened="{{_filterOpened}}">
+            <div class="filter-container">
+            <paper-icon-button icon="close" on-click="_toggleFilter"  id="closeButton"></paper-icon-button>
+            <!-- <div class="arrow"></div> -->
+                <t-filter id="filter" ></t-filter>
+            </div>
+        </iron-collapse>
         <vaadin-grid id="vaadingrid" selection-mode="single" >
             <content select=".vaadin-grid-content"></content>
         </vaadin-grid>
@@ -75,6 +127,27 @@ Polymer({
     is: 'tlg-report',
 
     properties: {
+
+        searchIcon:{
+            type:String,
+            value:'search'
+        },
+
+        filterIcon:{
+            type:String,
+            value:'filter-list'
+        },
+
+        addIcon:{
+            type:String,
+            value:'add'
+        },
+
+        removeIcon:{
+            type:String,
+            value:'delete'
+        },
+
         title: {
             type: String,
             value: ''
@@ -126,7 +199,7 @@ Polymer({
     setFilterData: function(filters){
         if(filters && filters.length){
             this.$.filter.data = filters;
-            this.$.filterHandle.hidden = false;
+            this.$.filterButton.hidden = false;
         }
     },
 
@@ -161,8 +234,8 @@ Polymer({
         }
     },
 
-    toggleFilter: function() {
-        this._showFilter = !this._showFilter;
+    _toggleFilter: function() {
+        this.$.filterCollapse.toggle();
     },
 
     addItem: function() {
