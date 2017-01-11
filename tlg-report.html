@@ -11,7 +11,7 @@
 
 
             display: block;
-            font-family: var(--primary-font-family,'Open sans'); 
+            font-family: var(--primary-font-family,inherit); 
             padding: var(--report-primary-spacing,30px);
             padding-bottom: 0;
 
@@ -45,19 +45,14 @@
             box-shadow: none;
             border-bottom: 1px solid var(--input-border-color,#ccc);
         }
-        #vaadingrid::content tfoot td{
-            padding: 0;
-        }
-        #vaadingrid::content .vaadin-grid-column-footer-content{
-            width: 100%;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flex;
-            display: -o-flex;
-            display: flex;
+        #paginationContainer{
             -ms-flex-pack: end;
             -webkit-justify-content: flex-end;
             justify-content: flex-end;
+            padding: 10px;
+            border: 1px solid var(--input-border-color,#ccc);
+            background: #fff;
+            color: var(--report-pagination-color, rgba(0,0,0,0.54));
         }
         h3{
             margin: 0;
@@ -86,7 +81,7 @@
             border-right: 10px solid transparent;
             border-bottom: 10px solid var(--report-filter-bg,#f6f7f9);
             position: absolute;
-            right: 10px;
+            right: 10px; 
             bottom: -10px;
         }
         #closeButton{
@@ -96,14 +91,47 @@
             width: 30px;
             height: 30px;
         }
+        #vaadingrid ::content .last-frozen{
+            background: #fff;
+        }
+        #searchInput{
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+            border:0;
+            border-bottom:1px solid var(--input-border-color, #ccc);
+            width: 200px;
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            transform: translateX(200%);
+            transition: 0.3s ease transform;
+            font-size: 16px;
+            outline: 0;
+            background: transparent;
+            color: var(--report-search-text-color, rgba(0,0,0,0.54));
+        }
+        .searchContainer{
+            @apply(--layout);
+            @apply(--layout-end-justified);
+            position: relative;
+            width: 250px;
+            overflow: hidden;
+        }
+        .searchContainer[active] #searchInput{
+            transform: translateX(0);
+        }
         </style>
         <div class="layout horizontal center">
             <h3>
                 [[title]]
             </h3>
             <span class="flex"></span>
-
-            <paper-icon-button icon="[[searchIcon]]" on-click="_searchClicked"  id="serachButton"></paper-icon-button>
+            <div class="searchContainer" active$="[[searchActive]]">
+                <paper-icon-button icon="[[searchIcon]]" toggles active="{{searchActive}}" on-click="_searchClicked"  id="serachButton"></paper-icon-button>
+                <input type="text" placeholder="Search here" id="searchInput">
+            </div>
             <paper-icon-button icon="[[filterIcon]]" on-click="_toggleFilter" active$="[[_filterOpened]]" id="filterButton"></paper-icon-button>
             <paper-icon-button icon="[[addIcon]]" on-click="addItem" hidden$="[[!enableAdd]]">Add Item</paper-icon-button>
             <paper-icon-button icon="[[removeIcon]]" on-click="removeItem" hidden$="[[!enableDelete]]">Remove Item</paper-icon-button>
@@ -119,6 +147,7 @@
         <vaadin-grid id="vaadingrid" selection-mode="single" >
             <content select=".vaadin-grid-content"></content>
         </vaadin-grid>
+        <div id="paginationContainer" class="layout horizontal"></div>
     </template>
 </dom-module>
 <script>
@@ -221,13 +250,7 @@ Polymer({
             pagination.pageSize = pagingInfo.pageSize || 10;
             pagination.pageNumber = pagingInfo.pageNumber || 1;
 
-            var footer = this.$.vaadingrid.footer;
-            if (footer.rowCount) {
-                footer.removeRow(0); //assuming no row is added from outside of this component.
-            }
-            footer.addRow(0);
-            footer.getCell(0, 0).colspan = this.$.vaadingrid.columns.length;
-            footer.getCell(0, 0).content = pagination.outerHTML;
+            this.$.paginationContainer.appendChild(pagination);
 
             this.$.vaadingrid.visibleRows = pagination.pageSize;
             this.$.vaadingrid.size = pagination.totalRecords;
