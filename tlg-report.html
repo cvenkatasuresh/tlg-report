@@ -128,11 +128,11 @@
                 [[title]]
             </h3>
             <span class="flex"></span>
-            <div class="searchContainer" active$="[[searchActive]]">
+            <div class="searchContainer" active$="[[searchActive]]" hidden$="[[!enableSearch]]">
                 <paper-icon-button icon="[[searchIcon]]" toggles active="{{searchActive}}" on-click="_searchClicked"  id="serachButton"></paper-icon-button>
                 <input type="text" placeholder="Search here" id="searchInput">
             </div>
-            <paper-icon-button icon="[[filterIcon]]" on-click="_toggleFilter" active$="[[_filterOpened]]" id="filterButton"></paper-icon-button>
+            <paper-icon-button icon="[[filterIcon]]" on-click="_toggleFilter" active$="[[_filterOpened]]" id="filterButton" hidden$="[[!enableFilter]]"></paper-icon-button>
             <paper-icon-button icon="[[addIcon]]" on-click="addItem" hidden$="[[!enableAdd]]">Add Item</paper-icon-button>
             <paper-icon-button icon="[[removeIcon]]" on-click="removeItem" hidden$="[[!enableDelete]]">Remove Item</paper-icon-button>
 
